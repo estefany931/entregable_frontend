@@ -90,6 +90,7 @@ const MedicoForm = () => {
                 <input type="email" name="email" placeholder="Correo" />
                 <input type="text" name="celular" placeholder="Teléfono" />
                 <input type="number" name="consultorio" placeholder="consultorio" />
+
                 <select name="especialidad">
                     <option value="0">Seleccione un programa</option>
                     {especialidad.map((especialidad) => (
