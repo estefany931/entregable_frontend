@@ -30,7 +30,6 @@ const MedicoForm = () => {
       email: e.target.email.value,
       especialidad: e.target.especialidad.value,
     };
-    console.log("medico ->>>> ", medico);
 
     try {
       const response = await fetch("http://localhost:8080/medico", {
@@ -81,7 +80,7 @@ const MedicoForm = () => {
         <input type="text" name="consultorio" placeholder="consultorio" />
         <select name="especialidad">
           <option value="" key="">
-            Seleccione un programa
+            Seleccione un Esecialidad
           </option>
           {especialidad.map((especialidad) => (
             <option

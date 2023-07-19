@@ -1,28 +1,18 @@
 import { useEffect, useState } from 'react';
 
 interface Cita {
-    date: string | null;
+    fecha_cita: string | null;
     medico: Medico;
     paciente: Paciente;
   }
   
   interface Medico {
-    tarjetaProfesional: number;
     nombre: string;
-    apellido: string,
-    consultorio: string,
-    telefono: string,
-    email: string,
-    especialidad: string,
     // Add more properties specific to the advisor if needed
   }
   
   interface Paciente {
-    cedula: string;
     nombre: string,
-    apellido: string,
-    telefono: string,
-    fechaNacimiento: string,
     // Add more properties specific to the student if needed
   }
 
@@ -32,11 +22,12 @@ const CitaTable = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:8080/cita');
+        const response = await fetch('http://localhost:8080/citas');
         const data = await response.json();
-
+        console.log('data ---->',data);
+        
         const citaData = [];
-        for (const cita of data._embedded.cita) {
+        for (const cita of data._embedded.citas) {
           const medicoResponse = await fetch(cita._links.medico.href);
           if (!medicoResponse.ok) {
             continue
@@ -45,8 +36,6 @@ const CitaTable = () => {
           
           const medicoData = await medicoResponse.json();
 
-          console.log(medicoData);
-
           const pacienteResponse = await fetch(cita._links.paciente.href);
           const pacienteData = await pacienteResponse.json();
           
@@ -54,10 +43,11 @@ const CitaTable = () => {
           citaData.push({
             medico: medicoData,
             paciente: pacienteData,
-            date: cita.date,
+            fecha_cita: cita.fecha_cita,
           });
         }
-
+        console.log('cita dta----->',citaData);
+        
         setCita(citaData);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -68,20 +58,20 @@ const CitaTable = () => {
   }, []);
 
   return (
-    <table>
-      <thead>
+    <table className="min-w-full">
+      <thead className="bg-white border-b">
         <tr>
-          <th>Medico Nombre</th>
-          <th>Paciente Nombre</th>
-          <th>Date</th>
+          <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">Medico</th>
+          <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">Paciente </th>
+          <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">Fecha Cita</th>
         </tr>
       </thead>
       <tbody>
         {cita.map((cita, index) => (
-          <tr key={index}>
-            <td>{cita.medico.nombre}</td>
-            <td>{cita.paciente.nombre}</td>
-            <td>{cita.date}</td>
+          <tr key={index} className="bg-gray-100 border-b">
+            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{cita.medico.nombre}</td>
+            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{cita.paciente.nombre}</td>
+            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{cita.fecha_cita}</td>
           </tr>
         ))}
       </tbody>
