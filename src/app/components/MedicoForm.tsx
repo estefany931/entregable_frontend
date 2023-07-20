@@ -14,6 +14,8 @@ interface Medico {
   telefono: string;
   email: string;
   especialidad: string;
+  // Add more properties specific to the student if needed
+
 }
 const MedicoForm = () => {
   const [especialidad, setEspecialidad] = useState<Especialidad[]>([]);

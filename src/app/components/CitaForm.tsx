@@ -16,6 +16,7 @@ interface Medico {
   especialidad: string;
   tarjeta_profesional: string;
   _links: Record<string, { href: string }>;
+  //Agregar los datos necesarios
 }
 
 interface Paciente {
@@ -25,6 +26,7 @@ interface Paciente {
   telefono: string;
   fechaNacimiento: string;
   _links: Record<string, { href: string }>;
+  //Agregar los datos necesarios
 }
 
 const CitaForm = () => {

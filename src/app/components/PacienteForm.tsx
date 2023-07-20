@@ -6,6 +6,8 @@ interface Paciente {
   apellido: string;
   celular: string;
   fechaNacimiento: Date;
+  // Add more properties specific to the student if needed
+
 }
 const PacienteForm = () => {
   const [submitted, setSubmitted] = useState(false);

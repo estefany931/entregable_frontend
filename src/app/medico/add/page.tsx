@@ -1,3 +1,4 @@
+//Forcreador medico
 "use client";
 import MedicoForm from "@/app/components/MedicoForm";
 export default function MedicoAddPage() {

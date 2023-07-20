@@ -56,7 +56,7 @@ const CitaTable = () => {
 
     fetchData();
   }, []);
-
+//estilos
   return (
     <table className="min-w-full">
       <thead className="bg-white border-b">
